@@ -1,0 +1,1845 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favorit Residence</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ================================================
+   TOKENS
+================================================ */
+    :root {
+      --gold: #c89b2a;
+      --gold-l: #e5b94b;
+      --gold-btn: #d4a435;
+      --gold-icon: #e8a820;
+      --white: #ffffff;
+      --txt: rgba(255, 255, 255, 0.88);
+      --txt-m: rgba(255, 255, 255, 0.52);
+      --dark: #0d1e35;
+      --card-dark: rgba(255, 255, 255, 0.07);
+      --card-dark-b: rgba(255, 255, 255, 0.12);
+      --nav-bg: rgba(20, 45, 80, 0.75);
+      --nav-brd: rgba(255, 255, 255, 0.14);
+      --r-sm: 10px;
+      --r-md: 16px;
+      --r-lg: 20px;
+      --r-xl: 24px;
+    }
+
+    /* ================================================
+   RESET
+================================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    img {
+      display: block;
+      max-width: 100%
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--white);
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse 120% 55% at 50% 0%, #1c3d72 0%, transparent 58%),
+        radial-gradient(ellipse 70% 65% at 88% 95%, #0e2548 0%, transparent 55%),
+        radial-gradient(ellipse 55% 50% at 5% 65%, #0c2040 0%, transparent 50%),
+        linear-gradient(180deg, #0b1b30 0%, #060d1a 100%);
+      min-height: 100vh;
+    }
+
+    /* ================================================
+   SCROLL REVEAL
+================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.vis {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .reveal-s {
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal-s.vis {
+      opacity: 1;
+      transform: scale(1)
+    }
+
+    .d1 {
+      transition-delay: .07s
+    }
+
+    .d2 {
+      transition-delay: .14s
+    }
+
+    .d3 {
+      transition-delay: .21s
+    }
+
+    .d4 {
+      transition-delay: .28s
+    }
+
+    .d5 {
+      transition-delay: .35s
+    }
+
+    .d6 {
+      transition-delay: .42s
+    }
+
+    /* ================================================
+   WRAPPER
+================================================ */
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 44px
+    }
+
+    /* ================================================
+   HEADER вЂ” DESKTOP
+================================================ */
+    .hdr {
+      padding: 36px 0 0;
+      animation: fadeIn .8s ease both
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .hdr__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .hdr__addr {
+      font-style: normal;
+      font-size: 13px;
+      color: var(--txt);
+      line-height: 1.65;
+      animation: slideUp .7s ease .1s both;
+    }
+
+    .hdr__logo {
+      text-align: center;
+      animation: slideUp .7s ease .2s both;
+    }
+
+    .hdr__logo-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: 7px;
+      display: block;
+      line-height: 1;
+    }
+
+    .hdr__logo-sub {
+      font-size: 11px;
+      letter-spacing: 8px;
+      color: var(--txt-m);
+      display: block;
+      margin-top: 3px;
+    }
+
+    .hdr__phone {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: slideUp .7s ease .3s both;
+    }
+
+    .hdr__phone-ico {
+      width: 42px;
+      height: 42px;
+      background: var(--gold-btn);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform .2s, background .2s;
+    }
+
+    .hdr__phone:hover .hdr__phone-ico {
+      transform: scale(1.1);
+      background: var(--gold-l)
+    }
+
+    .hdr__phone-ico svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff
+    }
+
+    .hdr__phone-num {
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: .3px
+    }
+
+    /* ================================================
+   MOBILE HEADER (hidden on desktop)
+================================================ */
+    .hdr-mob {
+      display: none;
+      padding: 18px 20px;
+      align-items: center;
+      justify-content: space-between;
+      animation: fadeIn .8s ease both;
+      position: relative;
+      z-index: 210;
+    }
+
+    .hdr-mob__logo {
+      text-align: left
+    }
+
+    .hdr-mob__logo-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      display: block;
+      line-height: 1;
+    }
+
+    .hdr-mob__logo-sub {
+      font-size: 9px;
+      letter-spacing: 6px;
+      color: var(--txt-m);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .hdr-mob__ham {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      z-index: 200;
+      position: relative;
+    }
+
+    .hdr-mob__ham span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .hdr-mob__ham.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px)
+    }
+
+    .hdr-mob__ham.open span:nth-child(2) {
+      opacity: 0
+    }
+
+    .hdr-mob__ham.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px)
+    }
+
+    /* ================================================
+   MOBILE FULL-SCREEN MENU вЂ” MIRROR BLUR EFFECT
+================================================ */
+    .mob-menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 15, 35, 0.45);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      z-index: 148;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease;
+    }
+
+    .mob-menu-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mob-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(12, 28, 60, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 0 0 28px 28px;
+      z-index: 150;
+      padding: 88px 32px 44px;
+      transform: translateY(-110%);
+      transition: transform .48s cubic-bezier(.4, 0, .2, 1), opacity .4s ease;
+      backdrop-filter: blur(48px) saturate(180%);
+      -webkit-backdrop-filter: blur(48px) saturate(180%);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      opacity: 0;
+    }
+
+    .mob-menu.open {
+      transform: translateY(0);
+      opacity: 1
+    }
+
+    /* Close X button inside mob-menu */
+    .mob-menu__close {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+
+    .mob-menu__close:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: rotate(90deg)
+    }
+
+    .mob-menu__close svg {
+      width: 20px;
+      height: 20px;
+      stroke: #fff;
+      stroke-width: 2;
+      fill: none
+    }
+
+    .mob-menu__list {
+      list-style: none
+    }
+
+    .mob-menu__item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transform: translateY(-12px);
+      opacity: 0;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+
+    .mob-menu.open .mob-menu__item {
+      transform: translateY(0);
+      opacity: 1
+    }
+
+    .mob-menu.open .mob-menu__item:nth-child(1) {
+      transition-delay: .08s
+    }
+
+    .mob-menu.open .mob-menu__item:nth-child(2) {
+      transition-delay: .14s
+    }
+
+    .mob-menu.open .mob-menu__item:nth-child(3) {
+      transition-delay: .20s
+    }
+
+    .mob-menu.open .mob-menu__item:nth-child(4) {
+      transition-delay: .26s
+    }
+
+    .mob-menu__item:last-child {
+      border-bottom: none
+    }
+
+    .mob-menu__link {
+      display: block;
+      padding: 20px 0;
+      font-size: 21px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      letter-spacing: .5px;
+      transition: color .2s, letter-spacing .2s;
+    }
+
+    .mob-menu__link:hover {
+      color: var(--gold-l);
+      letter-spacing: 1.5px
+    }
+
+    /* ================================================
+   NAV вЂ” DESKTOP
+================================================ */
+    .nav {
+      background: var(--nav-bg);
+      border: 1px solid var(--nav-brd);
+      border-radius: var(--r-md);
+      backdrop-filter: blur(14px);
+      animation: slideUp .7s ease .35s both;
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 32px;
+    }
+
+    .nav__list {
+      display: flex;
+      gap: 58px;
+      list-style: none
+    }
+
+    .nav__link {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .78);
+      position: relative;
+      padding-bottom: 2px;
+      transition: color .2s;
+    }
+
+    .nav__link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--gold-l);
+      transition: width .3s ease;
+    }
+
+    .nav__link:hover {
+      color: var(--gold-l)
+    }
+
+    .nav__link:hover::after {
+      width: 100%
+    }
+
+    /* ================================================
+   HERO
+================================================ */
+    .hero {
+      padding: 32px 0 72px
+    }
+
+    .hero__wrap {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      width: 100%;
+      height: 500px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .55);
+      animation: scaleIn .9s ease .4s both;
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(.96)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    .hero__wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 7s ease
+    }
+
+    .hero__wrap:hover img {
+      transform: scale(1.04)
+    }
+
+    /* MOBILE HERO */
+    .hero-mob {
+      padding: 16px 20px 32px;
+      display: none
+    }
+
+    .hero-mob__wrap {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      height: 260px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .5);
+    }
+
+    .hero-mob__wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    /* ================================================
+   SECTION TITLE
+================================================ */
+    .sec-ttl {
+      text-align: center;
+      margin-bottom: 52px
+    }
+
+    .sec-ttl h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      line-height: 1.1;
+    }
+
+    .sec-ttl .g {
+      color: var(--gold)
+    }
+
+    .sec-ttl--left {
+      text-align: left
+    }
+
+    /* mobile title */
+    .sec-ttl-mob {
+      margin-bottom: 24px
+    }
+
+    .sec-ttl-mob h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.2;
+    }
+
+    /* ================================================
+   LOYIHA HAQIDA вЂ” DESKTOP (3-col grid)
+================================================ */
+    .loyiha {
+      padding: 80px 0
+    }
+
+    .loyiha__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .lc {
+      background: #fff;
+      border-radius: var(--r-md);
+      padding: 28px 28px 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, .18);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .lc:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 44px rgba(0, 0, 0, .26)
+    }
+
+    .lc__ico {
+      width: 46px;
+      height: 46px;
+      background: var(--gold-icon);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lc__ico svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--dark)
+    }
+
+    .lc__txt {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.4
+    }
+
+    /* LOYIHA вЂ” MOBILE (1-col cards with icon+text horizontal) */
+    .loyiha-mob {
+      padding: 0 20px 40px;
+      display: none
+    }
+
+    .lc-mob {
+      background: #fff;
+      border-radius: var(--r-md);
+      padding: 20px 22px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+    }
+
+    .lc-mob__ico {
+      width: 48px;
+      height: 48px;
+      background: var(--gold-icon);
+      border-radius: 10px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lc-mob__ico svg {
+      width: 25px;
+      height: 25px;
+      fill: var(--dark)
+    }
+
+    .lc-mob__txt {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.4
+    }
+
+    /* ================================================
+   AFZALLIKLAR вЂ” DESKTOP (2-col)
+================================================ */
+    .afzal {
+      padding: 80px 0
+    }
+
+    .afzal__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px
+    }
+
+    .ac {
+      background: #fff;
+      border-radius: var(--r-md);
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, .18);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .ac:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, .24)
+    }
+
+    .ac__ico {
+      width: 48px;
+      height: 48px;
+      background: var(--gold-icon);
+      border-radius: 10px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ac__ico svg {
+      width: 25px;
+      height: 25px;
+      fill: var(--dark)
+    }
+
+    .ac__txt {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--dark)
+    }
+
+    /* AFZAL вЂ” MOBILE (1-col dark cards, no icon) */
+    .afzal-mob {
+      padding: 0 20px 40px;
+      display: none
+    }
+
+    .ac-mob {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--r-md);
+      padding: 22px 24px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .ac-mob p {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.4
+    }
+
+    /* ================================================
+   FASAD VA DIZAYN вЂ” DESKTOP (2-col)
+================================================ */
+    .fasad {
+      padding: 80px 0
+    }
+
+    .fasad__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px
+    }
+
+    .fi {
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .fi__img {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      height: 300px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .4);
+    }
+
+    .fi__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease
+    }
+
+    .fi:hover .fi__img img {
+      transform: scale(1.05)
+    }
+
+    .fi__cap {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .82);
+      text-align: center;
+      line-height: 1.5
+    }
+
+    /* FASAD вЂ” MOBILE (1-col, full-width images) */
+    .fasad-mob {
+      padding: 0 20px 40px;
+      display: none
+    }
+
+    .fi-mob {
+      margin-bottom: 32px
+    }
+
+    .fi-mob__img {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      height: 220px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .4);
+      margin-bottom: 12px;
+    }
+
+    .fi-mob__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .fi-mob__cap {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .82);
+      text-align: center;
+      line-height: 1.5
+    }
+
+    /* ================================================
+   PLANIROVKA SLIDER (shared)
+================================================ */
+    .plan {
+      padding: 80px 0
+    }
+
+    .plan-mob {
+      padding: 0 0 40px;
+      display: none
+    }
+
+    .plan__slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--r-md)
+    }
+
+    .plan__track {
+      display: flex;
+      transition: transform .5s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .plan__slide {
+      min-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 28px 40px;
+    }
+
+    .plan__slide img {
+      max-height: 580px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      filter: drop-shadow(0 16px 48px rgba(0, 0, 0, .45));
+    }
+
+    /* mobile slider */
+    .plan-mob .plan__slide {
+      padding: 16px 20px
+    }
+
+    .plan-mob .plan__slide img {
+      max-height: 320px
+    }
+
+    .plan__dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px
+    }
+
+    .plan__dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .22);
+      transition: background .3s, transform .3s;
+      cursor: pointer;
+    }
+
+    .plan__dot.on {
+      background: var(--gold-btn);
+      transform: scale(1.35)
+    }
+
+    .plan__btns {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 18px
+    }
+
+    .plan__btn {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--gold-btn);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(212, 164, 53, .35);
+      transition: background .2s, transform .2s;
+    }
+
+    .plan__btn:hover {
+      background: var(--gold-l);
+      transform: scale(1.1)
+    }
+
+    .plan__btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff
+    }
+
+    /* ================================================
+   ALOQA FORMASI вЂ” MOBILE
+================================================ */
+    .aloqa-mob {
+      padding: 0 20px 40px;
+      display: none
+    }
+
+    .aloqa-mob__wrap {
+      background: #fff;
+      border-radius: var(--r-xl);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .aloqa-mob__input {
+      width: 100%;
+      padding: 16px 18px;
+      border: 1.5px solid var(--gold-btn);
+      border-radius: var(--r-sm);
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background: #fff;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .aloqa-mob__input::placeholder {
+      color: #aaa
+    }
+
+    .aloqa-mob__input:focus {
+      border-color: var(--gold)
+    }
+
+    .aloqa-mob__btn {
+      width: 100%;
+      padding: 17px;
+      background: var(--gold-btn);
+      border: none;
+      border-radius: var(--r-sm);
+      font-size: 17px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: var(--dark);
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .aloqa-mob__btn:hover {
+      background: var(--gold-l)
+    }
+
+    /* ================================================
+   JOYLASHUV
+================================================ */
+    .joy {
+      padding: 80px 0
+    }
+
+    .joy-mob {
+      padding: 0 20px 40px;
+      display: none
+    }
+
+    .joy__map {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      height: 420px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, .45);
+    }
+
+    .joy-mob .joy__map {
+      height: 260px
+    }
+
+    .joy__map iframe {
+      width: 100%;
+      height: 100%;
+      border: none
+    }
+
+    /* ================================================
+   FOOTER вЂ” DESKTOP
+================================================ */
+    .ftr {
+      padding: 0 0 52px
+    }
+
+    .ftr__inner {
+      background: linear-gradient(135deg, #0d2040 0%, #112249 60%, #0a1a35 100%);
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: var(--r-lg);
+      padding: 28px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .ftr__logo-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      display: block;
+      line-height: 1;
+    }
+
+    .ftr__logo-sub {
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: var(--txt-m);
+      display: block;
+      margin-top: 3px;
+    }
+
+    .ftr__phone {
+      font-size: 15px;
+      font-weight: 500;
+      transition: color .2s
+    }
+
+    .ftr__phone:hover {
+      color: var(--gold-l)
+    }
+
+    .ftr__socials {
+      display: flex;
+      align-items: center;
+      gap: 28px
+    }
+
+    .ftr__soc {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 15px;
+      transition: color .2s;
+    }
+
+    .ftr__soc:hover {
+      color: var(--gold-l)
+    }
+
+    .ftr__soc svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0
+    }
+
+    /* FOOTER вЂ” MOBILE card style */
+    .ftr-mob {
+      padding: 0 20px 48px;
+      display: none
+    }
+
+    .ftr-mob__card {
+      background: linear-gradient(135deg, #0d2040 0%, #112249 60%, #0a1a35 100%);
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: var(--r-xl);
+      padding: 36px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .ftr-mob__logo-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      display: block;
+      line-height: 1;
+    }
+
+    .ftr-mob__logo-sub {
+      font-size: 10px;
+      letter-spacing: 6px;
+      color: var(--txt-m);
+      display: block;
+      margin-top: 4px;
+    }
+
+    .ftr-mob__phone {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      color: var(--white);
+    }
+
+    .ftr-mob__socials {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%
+    }
+
+    .ftr-mob__soc {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 17px;
+      color: var(--white);
+      transition: color .2s;
+    }
+
+    .ftr-mob__soc:hover {
+      color: var(--gold-l)
+    }
+
+    .ftr-mob__soc svg {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0
+    }
+
+    /* ================================================
+   RESPONSIVE BREAKPOINTS
+================================================ */
+    @media (max-width:768px) {
+
+      /* hide desktop elements */
+      .hdr {
+        display: none
+      }
+
+      .nav {
+        display: none
+      }
+
+      .hero {
+        display: none
+      }
+
+      .loyiha {
+        display: none
+      }
+
+      .afzal {
+        display: none
+      }
+
+      .fasad {
+        display: none
+      }
+
+      .plan {
+        display: none
+      }
+
+      .joy {
+        display: none
+      }
+
+      .ftr {
+        display: none
+      }
+
+      /* show mobile elements */
+      .hdr-mob {
+        display: flex
+      }
+
+      .hero-mob {
+        display: block
+      }
+
+      .loyiha-mob {
+        display: block
+      }
+
+      .afzal-mob {
+        display: block
+      }
+
+      .fasad-mob {
+        display: block
+      }
+
+      .plan-mob {
+        display: block
+      }
+
+      .aloqa-mob {
+        display: none !important
+      }
+
+      .joy-mob {
+        display: block
+      }
+
+      .ftr-mob {
+        display: block
+      }
+
+      .mob-menu {
+        display: block
+      }
+
+      .mob-menu-overlay {
+        display: block
+      }
+    }
+
+    @media (min-width:769px) and (max-width:1024px) {
+      .wrap {
+        padding: 0 28px
+      }
+
+      .loyiha__grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .hero__wrap {
+        height: 380px
+      }
+
+      .sec-ttl h2 {
+        font-size: 36px
+      }
+
+      .ftr__inner {
+        padding: 24px 28px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================================================
+     MOBILE HEADER
+================================================ -->
+  <div class="hdr-mob" id="mobHdr">
+    <a href="javascript:window.scrollTo({top:0,behavior:'smooth'})" class="hdr-mob__logo"
+      aria-label="Favorit Residence">
+      <span class="hdr-mob__logo-main">FAVORIT</span>
+      <span class="hdr-mob__logo-sub">RESIDENCE</span>
+    </a>
+    <button class="hdr-mob__ham" id="mobHamBtn" aria-expanded="false" aria-controls="mobMenu"
+      aria-label="Menyuni ochish">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="mob-menu-overlay" id="mobOverlay"></div>
+
+  <!-- MOBILE FULL-SCREEN MENU -->
+  <nav class="mob-menu" id="mobMenu" aria-label="Mobil navigatsiya">
+    <button class="mob-menu__close" id="mobMenuClose" aria-label="Menyuni yopish">
+      <svg viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <ul class="mob-menu__list" role="list">
+      <li class="mob-menu__item"><a href="#loyiha-mob" class="mob-menu__link" data-mob-link>Loyiha haqida</a></li>
+      <li class="mob-menu__item"><a href="#afzal-mob" class="mob-menu__link" data-mob-link>Afzalliklar</a></li>
+      <li class="mob-menu__item"><a href="#fasad-mob" class="mob-menu__link" data-mob-link>Dizayn</a></li>
+      <li class="mob-menu__item"><a href="#joy-mob" class="mob-menu__link" data-mob-link>Joylashuv</a></li>
+    </ul>
+  </nav>
+
+  <!-- ================================================
+     DESKTOP HEADER
+================================================ -->
+  <header class="hdr">
+    <div class="wrap">
+      <div class="hdr__top">
+        <address class="hdr__addr">
+          Toshkent shahar, Sergeli<br>tumani, Yangi Qo'yliq ko'chasi
+        </address>
+        <a href="#" class="hdr__logo" aria-label="Favorit Residence">
+          <span class="hdr__logo-main">FAVORIT</span>
+          <span class="hdr__logo-sub">RESIDENCE</span>
+        </a>
+        <a href="tel:+998555141000" class="hdr__phone">
+          <span class="hdr__phone-ico">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
+          </span>
+          <span class="hdr__phone-num">+998 55 514 10 00</span>
+        </a>
+      </div>
+      <nav class="nav" aria-label="Asosiy navigatsiya">
+        <div class="nav__inner">
+          <ul class="nav__list" role="list">
+            <li><a href="#loyiha" class="nav__link">Loyiha haqida</a></li>
+            <li><a href="#afzal" class="nav__link">Afzalliklar</a></li>
+            <li><a href="#fasad" class="nav__link">Dizayn</a></li>
+            <li><a href="#joy" class="nav__link">Joylashuv</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================================================
+       HERO DESKTOP
+  ================================================ -->
+    <section class="hero" aria-label="Bino ko'rinishi">
+      <div class="wrap">
+        <div class="hero__wrap reveal-s">
+          <img src="hero.png" alt="Favorit Residence kechki ko'rinish"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&q=80'" />
+        </div>
+      </div>
+    </section>
+
+    <!-- HERO MOBILE -->
+    <section class="hero-mob" aria-label="Bino ko'rinishi">
+      <div class="hero-mob__wrap">
+        <img src="hero.png" alt="Favorit Residence kechki ko'rinish"
+          onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80'" />
+      </div>
+    </section>
+
+    <!-- ================================================
+       LOYIHA HAQIDA DESKTOP
+  ================================================ -->
+    <section class="loyiha" id="loyiha" aria-labelledby="loyiha-h">
+      <div class="wrap">
+        <div class="sec-ttl reveal">
+          <h2 id="loyiha-h"><span class="g">LOYIHA</span> HAQIDA</h2>
+        </div>
+        <div class="loyiha__grid">
+          <article class="lc reveal d1">
+            <div class="lc__ico"><svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" />
+              </svg></div>
+            <p class="lc__txt">Qulay joylashuv</p>
+          </article>
+          <article class="lc reveal d2">
+            <div class="lc__ico"><svg viewBox="0 0 24 24">
+                <path
+                  d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM9 15H7v-2h2v2zm0-4H7V9h2v2zm0-4H7V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2z" />
+              </svg></div>
+            <p class="lc__txt">14 qavatli bino</p>
+          </article>
+          <article class="lc reveal d3">
+            <div class="lc__ico"><svg viewBox="0 0 24 24">
+                <path d="M4 4h6V2H2v8h2V4zm16 0v6h2V2h-8v2h6zM4 20v-6H2v8h8v-2H4zm16-6v6h-6v2h8v-8h-2z" />
+              </svg></div>
+            <p class="lc__txt">0.58 GA maydon</p>
+          </article>
+          <article class="lc reveal d2">
+            <div class="lc__ico"><svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg></div>
+            <p class="lc__txt">370+ xonadon</p>
+          </article>
+          <article class="lc reveal d3">
+            <div class="lc__ico"><svg viewBox="0 0 24 24">
+                <path d="M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z" />
+              </svg></div>
+            <p class="lc__txt">200+ avtoturargoh</p>
+          </article>
+          <article class="lc reveal d4">
+            <div class="lc__ico"><svg viewBox="0 0 24 24">
+                <path d="M20 4H4v2l16-.01V4zm1 5v-2l-1-5H4L3 7v2h1v11h11v-5h4v5h2V9h1zm-9 9H6V9h6v9z" />
+              </svg></div>
+            <p class="lc__txt">1-qavat noturar komplekslar</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOYIHA HAQIDA MOBILE -->
+    <section class="loyiha-mob" id="loyiha-mob" aria-labelledby="loyiha-mob-h">
+      <div class="sec-ttl sec-ttl-mob reveal">
+        <h2 id="loyiha-mob-h"><span class="g">LOYIHA</span> HAQIDA</h2>
+      </div>
+      <article class="lc-mob reveal d1">
+        <div class="lc-mob__ico"><svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" />
+          </svg></div>
+        <p class="lc-mob__txt">Qulay joylashuv</p>
+      </article>
+      <article class="lc-mob reveal d2">
+        <div class="lc-mob__ico"><svg viewBox="0 0 24 24">
+            <path
+              d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM9 15H7v-2h2v2zm0-4H7V9h2v2zm0-4H7V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2z" />
+          </svg></div>
+        <p class="lc-mob__txt">14 qavatli bino</p>
+      </article>
+      <article class="lc-mob reveal d3">
+        <div class="lc-mob__ico"><svg viewBox="0 0 24 24">
+            <path d="M4 4h6V2H2v8h2V4zm16 0v6h2V2h-8v2h6zM4 20v-6H2v8h8v-2H4zm16-6v6h-6v2h8v-8h-2z" />
+          </svg></div>
+        <p class="lc-mob__txt">0.58 GA maydon</p>
+      </article>
+      <article class="lc-mob reveal d4">
+        <div class="lc-mob__ico"><svg viewBox="0 0 24 24">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg></div>
+        <p class="lc-mob__txt">370+ xonadon</p>
+      </article>
+      <article class="lc-mob reveal d5">
+        <div class="lc-mob__ico"><svg viewBox="0 0 24 24">
+            <path d="M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z" />
+          </svg></div>
+        <p class="lc-mob__txt">200+ avtoturargoh</p>
+      </article>
+      <article class="lc-mob reveal d6">
+        <div class="lc-mob__ico"><svg viewBox="0 0 24 24">
+            <path d="M20 4H4v2l16-.01V4zm1 5v-2l-1-5H4L3 7v2h1v11h11v-5h4v5h2V9h1zm-9 9H6V9h6v9z" />
+          </svg></div>
+        <p class="lc-mob__txt">1-qavat noturar komplekslar</p>
+      </article>
+    </section>
+
+    <!-- ================================================
+       AFZALLIKLAR DESKTOP
+  ================================================ -->
+    <section class="afzal" id="afzal" aria-labelledby="afzal-h">
+      <div class="wrap">
+        <div class="sec-ttl reveal">
+          <h2 id="afzal-h">AFZALLIKLAR</h2>
+        </div>
+        <div class="afzal__grid">
+          <article class="ac reveal d1">
+            <div class="ac__ico"><svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg></div>
+            <p class="ac__txt">8 ballik zilzilabardoshlik</p>
+          </article>
+          <article class="ac reveal d2">
+            <div class="ac__ico"><svg viewBox="0 0 24 24">
+                <path d="M7 10l5-5 5 5H7zm0 4l5 5 5-5H7z" />
+              </svg></div>
+            <p class="ac__txt">Umumiy 7 ta liftlar</p>
+          </article>
+          <article class="ac reveal d2">
+            <div class="ac__ico"><svg viewBox="0 0 24 24">
+                <path
+                  d="M12 6V2l-4 4 4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 9.74C4.46 10.97 4 12.43 4 14c0 4.42 3.58 8 8 8v4l4-4-4-4v3z" />
+              </svg></div>
+            <p class="ac__txt">450 markali tsement</p>
+          </article>
+          <article class="ac reveal d3">
+            <div class="ac__ico"><svg viewBox="0 0 24 24">
+                <path
+                  d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
+              </svg></div>
+            <p class="ac__txt">24/7 qo'riqlanadi</p>
+          </article>
+          <article class="ac reveal d3">
+            <div class="ac__ico"><svg viewBox="0 0 24 24">
+                <path
+                  d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z" />
+              </svg></div>
+            <p class="ac__txt">A500 armaturasi</p>
+          </article>
+          <article class="ac reveal d4">
+            <div class="ac__ico"><svg viewBox="0 0 24 24">
+                <path
+                  d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+              </svg></div>
+            <p class="ac__txt">Aqlli elektron kirish eshiklari</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AFZALLIKLAR MOBILE (dark cards, no icon - matches design) -->
+    <section class="afzal-mob" id="afzal-mob" aria-labelledby="afzal-mob-h">
+      <div class="sec-ttl sec-ttl-mob reveal">
+        <h2 id="afzal-mob-h"><span class="g">AFZALLIKLAR</span></h2>
+      </div>
+      <div class="ac-mob reveal d1">
+        <p>8 ballik zilzilabardoshlik</p>
+      </div>
+      <div class="ac-mob reveal d2">
+        <p>450 markali tsement</p>
+      </div>
+      <div class="ac-mob reveal d3">
+        <p>A500 armaturasi</p>
+      </div>
+      <div class="ac-mob reveal d4">
+        <p>Mustaqil gazli isitish tizimi</p>
+      </div>
+      <div class="ac-mob reveal d5">
+        <p>Umumiy 7 ta liftlar</p>
+      </div>
+      <div class="ac-mob reveal d6">
+        <p>24/7 Qo'riqlanadi</p>
+      </div>
+      <div class="ac-mob reveal">
+        <p>Aqlli elektron kirish eshiklari</p>
+      </div>
+    </section>
+
+    <!-- ================================================
+       FASAD VA DIZAYN DESKTOP
+  ================================================ -->
+    <section class="fasad" id="fasad" aria-labelledby="fasad-h">
+      <div class="wrap">
+        <div class="sec-ttl sec-ttl--left reveal">
+          <h2 id="fasad-h"><span class="g">FASAD</span> VA DIZAYN</h2>
+        </div>
+        <div class="fasad__grid">
+          <div class="fi reveal d1">
+            <div class="fi__img">
+              <img src="fasad1.png" alt="Bazalt issiq-sovuqqa chidamli membrana"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80'" />
+            </div>
+            <p class="fi__cap">Bazalt, issiq-sovuqqa chidamli membrana</p>
+          </div>
+          <div class="fi reveal d2">
+            <div class="fi__img">
+              <img src="fasad2.png" alt="Kermogranit toshlari qoplanadi"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=80'" />
+            </div>
+            <p class="fi__cap">Kermogranit toshlari qoplanadi</p>
+          </div>
+          <div class="fi reveal d2">
+            <div class="fi__img">
+              <img src="fasad3.png" alt="Havo aylanadigan vent fasad"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=700&q=80'" />
+            </div>
+            <p class="fi__cap">Havo aylanadigan vent fasad</p>
+          </div>
+          <div class="fi reveal d3">
+            <div class="fi__img">
+              <img src="fasad4.png" alt="Dekorativ yoritish bilan zamonaviy ko'rinish"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=700&q=80'" />
+            </div>
+            <p class="fi__cap">Dekorativ yoritish bilan zamonaviy ko'rinish</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FASAD MOBILE (1-col, full-width) -->
+    <section class="fasad-mob" id="fasad-mob" aria-labelledby="fasad-mob-h">
+      <div class="sec-ttl sec-ttl-mob reveal">
+        <h2 id="fasad-mob-h"><span class="g">FASAD</span> VA DIZAYN</h2>
+      </div>
+      <div class="fi-mob reveal d1">
+        <div class="fi-mob__img">
+          <img src="fasad1.png" alt="Bazalt issiq-sovuqqa chidamli membrana"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80'" />
+        </div>
+        <p class="fi-mob__cap">Bazalt, issiq-sovuqqa chidamli membrana</p>
+      </div>
+      <div class="fi-mob reveal d2">
+        <div class="fi-mob__img">
+          <img src="fasad2.png" alt="Kermogranit toshlari qoplanadi"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=80'" />
+        </div>
+        <p class="fi-mob__cap">Kermogranit toshlari qoplanadi</p>
+      </div>
+      <div class="fi-mob reveal d3">
+        <div class="fi-mob__img">
+          <img src="fasad3.png" alt="Havo aylanadigan vent fasad"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=700&q=80'" />
+        </div>
+        <p class="fi-mob__cap">Havo aylanadigan vent-fasad</p>
+      </div>
+      <div class="fi-mob reveal d4">
+        <div class="fi-mob__img">
+          <img src="fasad4.png" alt="Dekorativ yoritish bilan zamonaviy ko'rinish"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=700&q=80'" />
+        </div>
+        <p class="fi-mob__cap">Dekorativ yoritish bilan zamonaviy ko'rinish</p>
+      </div>
+    </section>
+
+    <!-- ================================================
+       PLANIROVKA DESKTOP
+  ================================================ -->
+    <section class="plan" aria-label="Xonadon planirovkalari">
+      <div class="wrap">
+        <div class="plan__slider reveal">
+          <div class="plan__track" id="deskTrack">
+            <div class="plan__slide"><img src="plan1.jpg" alt="1-xonali planirovka" /></div>
+            <div class="plan__slide"><img src="plan2.jpg" alt="2-xonali planirovka" /></div>
+            <div class="plan__slide"><img src="plan3.jpg" alt="3-xonali planirovka" /></div>
+            <div class="plan__slide"><img src="plan4.png" alt="4-xonali planirovka" /></div>
+            <div class="plan__slide"><img src="plan5.jpg" alt="5-xonali planirovka" /></div>
+          </div>
+        </div>
+        <div class="plan__dots" id="deskDots"></div>
+        <div class="plan__btns">
+          <button class="plan__btn" id="deskPrev" aria-label="Oldingi"><svg viewBox="0 0 24 24">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg></button>
+          <button class="plan__btn" id="deskNext" aria-label="Keyingi"><svg viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANIROVKA MOBILE -->
+    <section class="plan-mob" aria-label="Xonadon planirovkalari">
+      <div class="plan__slider">
+        <div class="plan__track" id="mobTrack">
+          <div class="plan__slide"><img src="plan1.jpg" alt="1-xonali planirovka" /></div>
+          <div class="plan__slide"><img src="plan2.jpg" alt="2-xonali planirovka" /></div>
+          <div class="plan__slide"><img src="plan3.jpg" alt="3-xonali planirovka" /></div>
+          <div class="plan__slide"><img src="plan4.png" alt="4-xonali planirovka" /></div>
+          <div class="plan__slide"><img src="plan5.jpg" alt="5-xonali planirovka" /></div>
+        </div>
+      </div>
+      <div class="plan__dots" id="mobDots"></div>
+      <div class="plan__btns">
+        <button class="plan__btn" id="mobPrev" aria-label="Oldingi"><svg viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          </svg></button>
+        <button class="plan__btn" id="mobNext" aria-label="Keyingi"><svg viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+          </svg></button>
+      </div>
+    </section>
+
+    <!-- ALOQA FORMASI OLIB TASHLANDI -->
+
+    <!-- ================================================
+       JOYLASHUV DESKTOP
+  ================================================ -->
+    <section class="joy" id="joy" aria-labelledby="joy-h">
+      <div class="wrap">
+        <div class="sec-ttl reveal">
+          <h2 id="joy-h">JOYLASHUV</h2>
+        </div>
+        <div class="joy__map reveal-s">
+          <iframe
+            src="https://yandex.uz/map-widget/v1/?ll=69.289627%2C41.254394&z=16&l=map&mode=search&oid=159526648063&ol=biz"
+            title="Favorit Residence joylashuvi" allowfullscreen
+            style="border:none;width:100%;height:100%;border-radius:var(--r-md);" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOYLASHUV MOBILE -->
+    <section class="joy-mob" id="joy-mob" aria-labelledby="joy-mob-h">
+      <div class="sec-ttl sec-ttl-mob reveal">
+        <h2 id="joy-mob-h">JOYLASHUV</h2>
+      </div>
+      <div class="joy__map reveal-s" style="position:relative;">
+        <iframe
+          src="https://yandex.uz/map-widget/v1/?ll=69.289627%2C41.254394&z=16&l=map&mode=search&oid=159526648063&ol=biz"
+          title="Favorit Residence joylashuvi" allowfullscreen
+          style="border:none;width:100%;height:100%;border-radius:var(--r-md);display:block;" loading="lazy">
+        </iframe>
+        <a href="https://yandex.uz/maps/org/159526648063/" target="_blank"
+          rel="noopener noreferrer" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+                  background:#d4a435;color:#0d1e35;font-size:13px;font-weight:700;
+                  padding:9px 22px;border-radius:30px;text-decoration:none;
+                  box-shadow:0 4px 16px rgba(0,0,0,0.4);white-space:nowrap;z-index:10;">
+          &#128206; To'liq xaritada ochish
+        </a>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- ================================================
+     FOOTER DESKTOP
+================================================ -->
+  <footer class="ftr">
+    <div class="wrap">
+      <div class="ftr__inner reveal">
+        <div>
+          <span class="ftr__logo-main">CENTRO</span>
+          <span class="ftr__logo-sub">GROUP</span>
+        </div>
+        <a href="tel:+998555141000" class="ftr__phone">(55) 514-10-00</a>
+        <div class="ftr__socials">
+          <a href="https://www.instagram.com/favorit_residence/" target="_blank" rel="noopener" class="ftr__soc"
+            aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26">
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="#e8a820" stroke-width="1.8" />
+              <circle cx="12" cy="12" r="4.3" stroke="#e8a820" stroke-width="1.8" />
+              <circle cx="17.4" cy="6.6" r="1.1" fill="#e8a820" />
+            </svg>
+            Instagram
+          </a>
+          <a href="https://t.me/favorit_residence" target="_blank" rel="noopener" class="ftr__soc"
+            aria-label="Telegram">
+            <svg viewBox="0 0 24 24" fill="none" width="26" height="26">
+              <path d="M22 2L11 13" stroke="#e8a820" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#e8a820" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FOOTER MOBILE -->
+  <footer class="ftr-mob">
+    <div class="ftr-mob__card reveal">
+      <a href="javascript:location.reload()" style="text-decoration:none;color:inherit;">
+        <span class="ftr-mob__logo-main">CENTRO</span>
+        <span class="ftr-mob__logo-sub">GROUP</span>
+      </a>
+      <a href="tel:+998555141000" class="ftr-mob__phone">+998 (55) 514-10-00</a>
+      <div class="ftr-mob__socials">
+        <a href="https://www.instagram.com/favorit_residence/" target="_blank" rel="noopener" class="ftr-mob__soc"
+          aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="#e8a820" stroke-width="1.8" />
+            <circle cx="12" cy="12" r="4.3" stroke="#e8a820" stroke-width="1.8" />
+            <circle cx="17.4" cy="6.6" r="1.1" fill="#e8a820" />
+          </svg>
+          Instagram
+        </a>
+        <a href="https://t.me/favorit_residence" target="_blank" rel="noopener" class="ftr-mob__soc"
+          aria-label="Telegram">
+          <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+            <path d="M22 2L11 13" stroke="#e8a820" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#e8a820" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          Telegram
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================
+       MOBILE HAMBURGER MENU
+    ============================================ */
+    const mobHamBtn = document.getElementById('mobHamBtn');
+    const mobMenu = document.getElementById('mobMenu');
+    const mobOverlay = document.getElementById('mobOverlay');
+    const mobMenuClose = document.getElementById('mobMenuClose');
+
+    function openMenu() {
+      mobMenu.classList.add('open');
+      mobOverlay.classList.add('open');
+      mobHamBtn.classList.add('open');
+      mobHamBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobMenu.classList.remove('open');
+      mobOverlay.classList.remove('open');
+      mobHamBtn.classList.remove('open');
+      mobHamBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    mobHamBtn.addEventListener('click', () => {
+      mobMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    mobMenuClose.addEventListener('click', closeMenu);
+    mobOverlay.addEventListener('click', closeMenu);
+
+    document.querySelectorAll('[data-mob-link]').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    /* ============================================
+       SLIDER FACTORY
+    ============================================ */
+    function makeSlider(trackId, dotsId, prevId, nextId) {
+      const track = document.getElementById(trackId);
+      if (!track) return;
+      const slides = track.querySelectorAll('.plan__slide');
+      const dotsWrap = document.getElementById(dotsId);
+      let cur = 0, timer;
+
+      slides.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.className = 'plan__dot' + (i === 0 ? ' on' : '');
+        b.setAttribute('aria-label', (i + 1) + '-planirovka');
+        b.addEventListener('click', () => { goTo(i); reset(); });
+        dotsWrap.appendChild(b);
+      });
+
+      function dots() {
+        dotsWrap.querySelectorAll('.plan__dot').forEach((d, i) => d.classList.toggle('on', i === cur));
+      }
+      function goTo(n) {
+        cur = (n + slides.length) % slides.length;
+        track.style.transform = `translateX(-${cur * 100}%)`;
+        dots();
+      }
+      function reset() { clearInterval(timer); timer = setInterval(() => goTo(cur + 1), 4500); }
+
+      document.getElementById(prevId).addEventListener('click', () => { goTo(cur - 1); reset(); });
+      document.getElementById(nextId).addEventListener('click', () => { goTo(cur + 1); reset(); });
+      reset();
+    }
+
+    makeSlider('deskTrack', 'deskDots', 'deskPrev', 'deskNext');
+    makeSlider('mobTrack', 'mobDots', 'mobPrev', 'mobNext');
+
+    /* ============================================
+       SCROLL REVEAL
+    ============================================ */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-s').forEach(el => io.observe(el));
+  </script>
+</body>
+
+</html>
