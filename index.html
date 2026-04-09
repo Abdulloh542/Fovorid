@@ -32,6 +32,226 @@
     }
 
     /* ================================================
+   PREMIUM ANIMATIONS
+================================================ */
+    @keyframes goldShimmer {
+      0% {
+        background-position: -200% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-8px)
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(212, 164, 53, .5)
+      }
+
+      70% {
+        box-shadow: 0 0 0 18px rgba(212, 164, 53, 0)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(212, 164, 53, 0)
+      }
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(1);
+        opacity: .4
+      }
+
+      100% {
+        transform: scale(2.5);
+        opacity: 0
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0)
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0)
+      }
+    }
+
+    @keyframes countUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes bgGradientMove {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+
+    /* Gold shimmer text — section titles accent */
+    .g {
+      background: linear-gradient(90deg, #c89b2a 0%, #f0d060 30%, #c89b2a 60%, #f0d060 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: goldShimmer 3s linear infinite;
+    }
+
+    /* Section divider line */
+    .sec-divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-l), transparent);
+      margin: 0 auto 20px;
+      border-radius: 3px;
+    }
+
+    .sec-divider-mob {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-l), transparent);
+      margin: 0 auto 14px;
+      border-radius: 2px;
+    }
+
+    /* Floating CTA button */
+    .floating-cta {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 100;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #d4a435, #e5b94b);
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 28px rgba(212, 164, 53, .45);
+      cursor: pointer;
+      animation: pulse 2.5s infinite, float 3s ease-in-out infinite;
+      transition: transform .2s, box-shadow .2s;
+      text-decoration: none;
+    }
+
+    .floating-cta:hover {
+      transform: scale(1.12);
+      box-shadow: 0 8px 36px rgba(212, 164, 53, .65);
+    }
+
+    .floating-cta svg {
+      width: 28px;
+      height: 28px;
+      fill: #0d1e35;
+    }
+
+    /* Scroll-to-top */
+    .scroll-top {
+      position: fixed;
+      bottom: 100px;
+      right: 28px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .4s, transform .4s, background .2s;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .scroll-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-top:hover {
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .scroll-top svg {
+      width: 20px;
+      height: 20px;
+      stroke: #fff;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    @media (max-width:768px) {
+      .floating-cta {
+        width: 52px;
+        height: 52px;
+        bottom: 20px;
+        right: 16px;
+      }
+
+      .floating-cta svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .scroll-top {
+        bottom: 82px;
+        right: 16px;
+        width: 38px;
+        height: 38px;
+      }
+    }
+
+    /* ================================================
    RESET
 ================================================ */
     *,
@@ -81,8 +301,8 @@
 ================================================ */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .6s ease, transform .6s ease;
+      transform: translateY(32px);
+      transition: opacity .7s cubic-bezier(.4, 0, .2, 1), transform .7s cubic-bezier(.4, 0, .2, 1);
     }
 
     .reveal.vis {
@@ -92,8 +312,8 @@
 
     .reveal-s {
       opacity: 0;
-      transform: scale(0.96);
-      transition: opacity .65s ease, transform .65s ease;
+      transform: scale(0.94);
+      transition: opacity .75s cubic-bezier(.4, 0, .2, 1), transform .75s cubic-bezier(.4, 0, .2, 1);
     }
 
     .reveal-s.vis {
@@ -101,28 +321,40 @@
       transform: scale(1)
     }
 
+    /* Slide from left */
+    .reveal-l {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity .7s cubic-bezier(.4, 0, .2, 1), transform .7s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .reveal-l.vis {
+      opacity: 1;
+      transform: translateX(0)
+    }
+
     .d1 {
-      transition-delay: .07s
+      transition-delay: .08s
     }
 
     .d2 {
-      transition-delay: .14s
+      transition-delay: .16s
     }
 
     .d3 {
-      transition-delay: .21s
+      transition-delay: .24s
     }
 
     .d4 {
-      transition-delay: .28s
+      transition-delay: .32s
     }
 
     .d5 {
-      transition-delay: .35s
+      transition-delay: .40s
     }
 
     .d6 {
-      transition-delay: .42s
+      transition-delay: .48s
     }
 
     /* ================================================
@@ -484,16 +716,53 @@
    HERO
 ================================================ */
     .hero {
-      padding: 32px 0 72px
+      padding: 32px 0 72px;
+      position: relative;
     }
 
     .hero__wrap {
       border-radius: var(--r-lg);
       overflow: hidden;
       width: 100%;
-      height: 500px;
-      box-shadow: 0 28px 80px rgba(0, 0, 0, .55);
+      height: 520px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .55), 0 0 120px rgba(212, 164, 53, .06);
       animation: scaleIn .9s ease .4s both;
+      position: relative;
+    }
+
+    /* Hero overlay gradient */
+    .hero__wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(6, 13, 26, .7) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Hero badge */
+    .hero__badge {
+      position: absolute;
+      bottom: 36px;
+      left: 44px;
+      z-index: 2;
+      animation: slideUp .8s ease .7s both;
+    }
+
+    .hero__badge-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, .5);
+    }
+
+    .hero__badge-sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .7);
+      margin-top: 6px;
+      letter-spacing: .5px;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, .4);
     }
 
     @keyframes scaleIn {
@@ -512,11 +781,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 7s ease
+      transition: transform 8s ease;
     }
 
     .hero__wrap:hover img {
-      transform: scale(1.04)
+      transform: scale(1.05);
     }
 
     /* MOBILE HERO */
@@ -543,23 +812,20 @@
 ================================================ */
     .sec-ttl {
       text-align: center;
-      margin-bottom: 52px
+      margin-bottom: 52px;
     }
 
     .sec-ttl h2 {
       font-family: 'Playfair Display', serif;
       font-size: 48px;
       font-weight: 700;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       line-height: 1.1;
-    }
-
-    .sec-ttl .g {
-      color: var(--gold)
+      position: relative;
     }
 
     .sec-ttl--left {
-      text-align: left
+      text-align: left;
     }
 
     /* mobile title */
@@ -596,12 +862,31 @@
       flex-direction: column;
       gap: 18px;
       box-shadow: 0 4px 24px rgba(0, 0, 0, .18);
-      transition: transform .25s, box-shadow .25s;
+      transition: transform .35s cubic-bezier(.4, 0, .2, 1), box-shadow .35s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lc::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-l), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+    }
+
+    .lc:hover::before {
+      transform: scaleX(1);
     }
 
     .lc:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 14px 44px rgba(0, 0, 0, .26)
+      transform: translateY(-6px);
+      box-shadow: 0 18px 52px rgba(0, 0, 0, .24), 0 0 0 1px rgba(212, 164, 53, .1);
     }
 
     .lc__ico {
@@ -689,12 +974,27 @@
       align-items: center;
       gap: 20px;
       box-shadow: 0 4px 24px rgba(0, 0, 0, .18);
-      transition: transform .25s, box-shadow .25s;
+      transition: transform .35s cubic-bezier(.4, 0, .2, 1), box-shadow .35s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ac::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(212, 164, 53, .06));
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .ac:hover::after {
+      opacity: 1;
     }
 
     .ac:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, .24)
+      transform: translateY(-5px);
+      box-shadow: 0 14px 42px rgba(0, 0, 0, .22), 0 0 0 1px rgba(212, 164, 53, .1);
     }
 
     .ac__ico {
@@ -733,13 +1033,20 @@
       padding: 22px 24px;
       margin-bottom: 12px;
       text-align: center;
+      transition: background .3s, border-color .3s, transform .3s;
+    }
+
+    .ac-mob:active {
+      transform: scale(.97);
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(212, 164, 53, .25);
     }
 
     .ac-mob p {
       font-size: 17px;
       font-weight: 600;
       color: var(--white);
-      line-height: 1.4
+      line-height: 1.4;
     }
 
     /* ================================================
@@ -1143,6 +1450,66 @@
     }
 
     /* ================================================
+   STATS SECTION
+================================================ */
+    .stats {
+      padding: 60px 0;
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      margin: 40px 0;
+    }
+
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat__num {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--gold-l);
+      margin-bottom: 8px;
+      animation: countUp .8s ease both;
+    }
+
+    .stat__label {
+      font-size: 14px;
+      color: var(--txt-m);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .stats__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats {
+        padding: 40px 0;
+      }
+
+      .stat__num {
+        font-size: 32px;
+      }
+
+      .stat__label {
+        font-size: 11px;
+        letter-spacing: 1px;
+      }
+    }
+
+    /* ================================================
    RESPONSIVE BREAKPOINTS
 ================================================ */
     @media (max-width:768px) {
@@ -1328,14 +1695,16 @@
 
   <main>
 
-    <!-- ================================================
-       HERO DESKTOP
-  ================================================ -->
+    <!-- HERO DESKTOP -->
     <section class="hero" aria-label="Bino ko'rinishi">
       <div class="wrap">
         <div class="hero__wrap reveal-s">
           <img src="hero.png" alt="Favorit Residence kechki ko'rinish"
             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1400&q=80'" />
+          <div class="hero__badge">
+            <div class="hero__badge-title">FAVORIT RESIDENCE</div>
+            <div class="hero__badge-sub">Toshkent, Sergeli — Premium turar-joy majmuasi</div>
+          </div>
         </div>
       </div>
     </section>
@@ -1354,6 +1723,7 @@
     <section class="loyiha" id="loyiha" aria-labelledby="loyiha-h">
       <div class="wrap">
         <div class="sec-ttl reveal">
+          <div class="sec-divider"></div>
           <h2 id="loyiha-h"><span class="g">LOYIHA</span> HAQIDA</h2>
         </div>
         <div class="loyiha__grid">
@@ -1402,6 +1772,7 @@
     <!-- LOYIHA HAQIDA MOBILE -->
     <section class="loyiha-mob" id="loyiha-mob" aria-labelledby="loyiha-mob-h">
       <div class="sec-ttl sec-ttl-mob reveal">
+        <div class="sec-divider-mob"></div>
         <h2 id="loyiha-mob-h"><span class="g">LOYIHA</span> HAQIDA</h2>
       </div>
       <article class="lc-mob reveal d1">
@@ -1450,6 +1821,7 @@
     <section class="afzal" id="afzal" aria-labelledby="afzal-h">
       <div class="wrap">
         <div class="sec-ttl reveal">
+          <div class="sec-divider"></div>
           <h2 id="afzal-h">AFZALLIKLAR</h2>
         </div>
         <div class="afzal__grid">
@@ -1497,9 +1869,34 @@
       </div>
     </section>
 
+    <!-- STATS DESKTOP -->
+    <section class="stats reveal">
+      <div class="wrap">
+        <div class="stats__grid">
+          <div class="stat">
+            <span class="stat__num">450+</span>
+            <span class="stat__label">Xonadonlar</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">14</span>
+            <span class="stat__label">Qavatlar</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">200+</span>
+            <span class="stat__label">Avtoturargoh</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">24/7</span>
+            <span class="stat__label">Xavfsizlik</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- AFZALLIKLAR MOBILE (dark cards, no icon - matches design) -->
     <section class="afzal-mob" id="afzal-mob" aria-labelledby="afzal-mob-h">
       <div class="sec-ttl sec-ttl-mob reveal">
+        <div class="sec-divider-mob"></div>
         <h2 id="afzal-mob-h"><span class="g">AFZALLIKLAR</span></h2>
       </div>
       <div class="ac-mob reveal d1">
@@ -1525,12 +1922,36 @@
       </div>
     </section>
 
+    <!-- STATS MOBILE -->
+    <section class="stats reveal">
+      <div class="wrap">
+        <div class="stats__grid">
+          <div class="stat">
+            <span class="stat__num">450+</span>
+            <span class="stat__label">Xonadonlar</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">14</span>
+            <span class="stat__label">Qavatlar</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">200+</span>
+            <span class="stat__label">Parkovka</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">24/7</span>
+            <span class="stat__label">Kuzatuv</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ================================================
        FASAD VA DIZAYN DESKTOP
   ================================================ -->
     <section class="fasad" id="fasad" aria-labelledby="fasad-h">
       <div class="wrap">
-        <div class="sec-ttl sec-ttl--left reveal">
+        <div class="sec-ttl sec-ttl--left reveal-l">
           <h2 id="fasad-h"><span class="g">FASAD</span> VA DIZAYN</h2>
         </div>
         <div class="fasad__grid">
@@ -1680,8 +2101,7 @@
           title="Favorit Residence joylashuvi" allowfullscreen
           style="border:none;width:100%;height:100%;border-radius:var(--r-md);display:block;" loading="lazy">
         </iframe>
-        <a href="https://yandex.uz/maps/org/159526648063/" target="_blank"
-          rel="noopener noreferrer" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+        <a href="https://yandex.uz/maps/org/159526648063/" target="_blank" rel="noopener noreferrer" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
                   background:#d4a435;color:#0d1e35;font-size:13px;font-weight:700;
                   padding:9px 22px;border-radius:30px;text-decoration:none;
                   box-shadow:0 4px 16px rgba(0,0,0,0.4);white-space:nowrap;z-index:10;">
@@ -1838,8 +2258,39 @@
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
 
-    document.querySelectorAll('.reveal, .reveal-s').forEach(el => io.observe(el));
+    document.querySelectorAll('.reveal, .reveal-s, .reveal-l').forEach(el => io.observe(el));
+
+    /* ============================================
+       SCROLL-TO-TOP BUTTON VISIBILITY
+    ============================================ */
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) {
+        scrollTopBtn.classList.add('show');
+      } else {
+        scrollTopBtn.classList.remove('show');
+      }
+    }, { passive: true });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
+
+  <!-- FLOATING CALL CTA -->
+  <a href="tel:+998555141000" class="floating-cta" aria-label="Qo'ng'iroq qilish">
+    <svg viewBox="0 0 24 24">
+      <path
+        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+    </svg>
+  </a>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Yuqoriga qaytish">
+    <svg viewBox="0 0 24 24">
+      <polyline points="18 15 12 9 6 15" />
+    </svg>
+  </button>
 </body>
 
 </html>
