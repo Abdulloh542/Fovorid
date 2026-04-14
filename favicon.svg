@@ -5,19 +5,33 @@
       <stop offset="100%" stop-color="#0d2147"/>
     </linearGradient>
   </defs>
-  <!-- Background -->
-  <rect width="512" height="512" fill="url(#bg)" rx="0"/>
-  <!-- "F" letter in elegant serif style matching the logo -->
+
+  <!-- Navy blue background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- FAVORIT — large elegant serif, slightly smaller than image for favicon fit -->
   <text
     x="256"
-    y="340"
+    y="248"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="340"
-    font-weight="300"
+    font-size="148"
+    font-weight="400"
     fill="#ffffff"
     text-anchor="middle"
     dominant-baseline="auto"
-    letter-spacing="-10"
-    style="font-style:normal;"
-  >F</text>
+    letter-spacing="6"
+  >FAVORIT</text>
+
+  <!-- RESIDENCE — small, wide letter-spacing, below FAVORIT -->
+  <text
+    x="256"
+    y="308"
+    font-family="Georgia, Arial, sans-serif"
+    font-size="44"
+    font-weight="400"
+    fill="#ffffff"
+    text-anchor="middle"
+    dominant-baseline="auto"
+    letter-spacing="10"
+  >RESIDENCE</text>
 </svg>
